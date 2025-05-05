@@ -12,7 +12,8 @@
 
 .cart-item-image {
   width: 120px;
-  /* height: 180px; */
+  border-radius: 10px;
+  max-width: 120px;
 }
 
 .cart-item-details {

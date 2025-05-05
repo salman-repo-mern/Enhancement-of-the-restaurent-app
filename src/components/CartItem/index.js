@@ -1,24 +1,13 @@
 import {useContext} from 'react'
 import {FaRegTrashAlt} from 'react-icons/fa'
-
 import CartContext from '../../context/CartContext'
-
 import './index.css'
 
 const CartItem = ({cartItemDetails}) => {
-  const {
-    dishId,
-    dishName,
-    dishImage,
-    quantity,
-    dishCurrency,
-    dishPrice,
-  } = cartItemDetails
-  const {
-    incrementCartItemQuantity,
-    decrementCartItemQuantity,
-    removeCartItem,
-  } = useContext(CartContext)
+  const {dishId, dishName, dishImage, quantity, dishCurrency, dishPrice} =
+    cartItemDetails
+  const {incrementCartItemQuantity, decrementCartItemQuantity, removeCartItem} =
+    useContext(CartContext)
 
   const onIncreaseQty = () => incrementCartItemQuantity(dishId)
 
@@ -28,7 +17,7 @@ const CartItem = ({cartItemDetails}) => {
 
   return (
     <li className="cart-item-container">
-      <img className="cart-item-image" src={dishImage} alt={dishName} />
+      <img className="cart-item-image" src={dishImage} alt="dishName" />
       <div className="cart-item-details">
         <p className="cart-item-name mb-1">{dishName}</p>
         <p className="dish-currency-price mt-0 mb-2">
@@ -54,5 +43,4 @@ const CartItem = ({cartItemDetails}) => {
     </li>
   )
 }
-
 export default CartItem

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import {useState} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
@@ -61,6 +60,7 @@ const Login = props => {
           type="text"
           onChange={onChangeHandler}
           value={username}
+          placeholder="Enter UserName"
         />
         <label htmlFor="password">PASSWORD</label>
         <input
@@ -68,6 +68,7 @@ const Login = props => {
           type="password"
           onChange={onChangeHandler}
           value={password}
+          placeholder="Enter Password"
         />
         <button type="submit" className="login-button">
           Login
