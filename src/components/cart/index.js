@@ -1,17 +1,14 @@
 import {useContext} from 'react'
-
 import Header from '../Header'
 import CartItem from '../CartItem'
-
 import CartContext from '../../context/CartContext'
-
 import './index.css'
 
 const Cart = () => {
   const {cartList, removeAllCartItems} = useContext(CartContext)
 
   const renderEmptyView = () => (
-    <div className="m-auto d-flex flex-column align-items-center">
+    <div className="cart-main-container">
       <img
         src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-empty-cart-img.png"
         alt="empty view"
@@ -23,17 +20,18 @@ const Cart = () => {
 
   const renderCartItems = () => (
     <>
-      <div className="cart-items-header d-flex align-items-center justify-content-between">
+      <div className="cart-items-header">
         <h1>Cart Items</h1>
         <button
           type="button"
           className="remove-all-btn text-primary"
           onClick={removeAllCartItems}
+          data-testid="remove-all"
         >
           Remove All
         </button>
       </div>
-      <ul className="ps-0 d-flex flex-column align-items-center">
+      <ul className="ps-0 list-container">
         {cartList.map(dish => (
           <CartItem key={dish.dishId} cartItemDetails={dish} />
         ))}
@@ -42,9 +40,9 @@ const Cart = () => {
   )
 
   return (
-    <div className="cart-page-container d-flex flex-column">
+    <div className="cart-page-container">
       <Header />
-      <div className="cart-body-container d-flex flex-column">
+      <div className="cart-body-container">
         {cartList.length === 0 ? renderEmptyView() : renderCartItems()}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect, useContext, useCallback} from 'react'
 
 import Header from '../Header'
 import DishItem from '../DishItem'
@@ -14,26 +14,29 @@ const Home = () => {
 
   const {cartList, setRestaurantName} = useContext(CartContext)
 
-  const getUpdatedData = tableMenuList =>
-    tableMenuList.map(eachMenu => ({
-      menuCategory: eachMenu.menu_category,
-      menuCategoryId: eachMenu.menu_category_id,
-      menuCategoryImage: eachMenu.menu_category_image,
-      categoryDishes: eachMenu.category_dishes.map(eachDish => ({
-        dishId: eachDish.dish_id,
-        dishName: eachDish.dish_name,
-        dishPrice: eachDish.dish_price,
-        dishImage: eachDish.dish_image,
-        dishCurrency: eachDish.dish_currency,
-        dishCalories: eachDish.dish_calories,
-        dishDescription: eachDish.dish_description,
-        dishAvailability: eachDish.dish_Availability,
-        dishType: eachDish.dish_Type,
-        addonCat: eachDish.addonCat,
+  const getUpdatedData = useCallback(
+    tableMenuList =>
+      tableMenuList.map(eachMenu => ({
+        menuCategory: eachMenu.menu_category,
+        menuCategoryId: eachMenu.menu_category_id,
+        menuCategoryImage: eachMenu.menu_category_image,
+        categoryDishes: eachMenu.category_dishes.map(eachDish => ({
+          dishId: eachDish.dish_id,
+          dishName: eachDish.dish_name,
+          dishPrice: eachDish.dish_price,
+          dishImage: eachDish.dish_image,
+          dishCurrency: eachDish.dish_currency,
+          dishCalories: eachDish.dish_calories,
+          dishDescription: eachDish.dish_description,
+          dishAvailability: eachDish.dish_Availability,
+          dishType: eachDish.dish_Type,
+          addonCat: eachDish.addonCat,
+        })),
       })),
-    }))
+    [],
+  )
 
-  const fetchRestaurantApi = async () => {
+  const fetchRestaurantApi = useCallback(async () => {
     const api =
       'https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details'
     const apiResponse = await fetch(api)
@@ -43,11 +46,11 @@ const Home = () => {
     setRestaurantName(data[0].restaurant_name)
     setActiveCategoryId(updatedData[0].menuCategoryId)
     setIsLoading(false)
-  }
+  }, [getUpdatedData, setRestaurantName])
 
   useEffect(() => {
     fetchRestaurantApi()
-  }, [])
+  }, [fetchRestaurantApi])
 
   const onUpdateActiveCategoryIdx = menuCategoryId =>
     setActiveCategoryId(menuCategoryId)

@@ -7,12 +7,7 @@
 .tab-container {
   overflow-y: auto;
   box-shadow: 0px 10px 10px -15px #111;
-  /* -ms-overflow-style: none;
-  scrollbar-width: none;*/
 }
-/* .tab-container::-webkit-scrollbar {
-  display: none;
-} */
 
 .each-tab-item {
   list-style-type: none;

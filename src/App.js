@@ -3,7 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 
 import Home from './components/Home'
 import Login from './components/Login'
-import Cart from './components/Cart'
+import Cart from './components/cart'
 import NotFound from './components/NotFound'
 
 import ProtectedRoute from './components/ProtectedRoute'

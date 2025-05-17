@@ -25,15 +25,31 @@ const DishItem = ({dishDetails}) => {
   const onDecreaseQuantity = () =>
     setQuantity(prevState => (prevState > 0 ? prevState - 1 : 0))
 
-  const onAddItemToCart = () => addCartItem({...dishDetails, quantity})
+  const onAddItemToCart = () => {
+    if (quantity > 0) {
+      addCartItem({...dishDetails, quantity})
+    }
+  }
 
   const renderControllerButton = () => (
-    <div className="controller-container d-flex align-items-center bg-success">
-      <button className="button" type="button" onClick={onDecreaseQuantity}>
+    <div className="controller-container bg-success">
+      <button
+        className="button"
+        type="button"
+        onClick={onDecreaseQuantity}
+        data-testid="decrease-quantity"
+      >
         -
       </button>
-      <p className="quantity">{quantity}</p>
-      <button className="button" type="button" onClick={onIncreaseQuantity}>
+      <p className="quantity" data-testid="item-quantity">
+        {quantity}
+      </p>
+      <button
+        className="button"
+        type="button"
+        onClick={onIncreaseQuantity}
+        data-testid="increase-quantity"
+      >
         +
       </button>
     </div>
@@ -46,26 +62,34 @@ const DishItem = ({dishDetails}) => {
       >
         <div className={`veg-round ${dishType === 1 ? 'non-veg-round' : ''}`} />
       </div>
+
       <div className="dish-details-container">
-        <h1 className="dish-name">{dishName}</h1>
+        <p className="dish-name" data-testid="dish-name">
+          {dishName}
+        </p>
         <p className="dish-currency-price">
           {dishCurrency} {dishPrice}
         </p>
         <p className="dish-description">{dishDescription}</p>
-        {dishAvailability && renderControllerButton()}
-        {!dishAvailability && (
+
+        {dishAvailability ? (
+          renderControllerButton()
+        ) : (
           <p className="not-availability-text text-danger">Not available</p>
         )}
+
         {addonCat.length !== 0 && (
           <p className="addon-availability-text mb-0">
             Customizations available
           </p>
         )}
+
         {quantity > 0 && (
           <button
             type="button"
             className="btn btn-outline-primary mt-3"
             onClick={onAddItemToCart}
+            data-testid="add-to-cart"
           >
             ADD TO CART
           </button>
@@ -73,7 +97,12 @@ const DishItem = ({dishDetails}) => {
       </div>
 
       <p className="dish-calories text-warning">{dishCalories} calories</p>
-      <img className="dish-image" alt={dishName} src={dishImage} />
+      <img
+        className="dish-image"
+        alt={dishName}
+        src={dishImage}
+        data-testid="dish-image"
+      />
     </li>
   )
 }

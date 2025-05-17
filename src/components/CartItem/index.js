@@ -4,31 +4,57 @@ import CartContext from '../../context/CartContext'
 import './index.css'
 
 const CartItem = ({cartItemDetails}) => {
-  const {dishId, dishName, dishImage, quantity, dishCurrency, dishPrice} =
-    cartItemDetails
-  const {incrementCartItemQuantity, decrementCartItemQuantity, removeCartItem} =
-    useContext(CartContext)
+  const {
+    dishId,
+    dishName,
+    dishImage,
+    quantity,
+    dishCurrency,
+    dishPrice,
+  } = cartItemDetails
 
-  const onIncreaseQty = () => incrementCartItemQuantity(dishId)
+  const {
+    incrementCartItemQuantity,
+    decrementCartItemQuantity,
+    removeCartItem,
+  } = useContext(CartContext)
 
-  const onDecreaseQty = () => decrementCartItemQuantity(dishId)
+  const onIncreaseQty = () => {
+    incrementCartItemQuantity(dishId)
+  }
 
-  const onRemoveCartItem = () => removeCartItem(dishId)
+  const onDecreaseQty = () => {
+    decrementCartItemQuantity(dishId)
+  }
+
+  const onRemoveCartItem = () => {
+    removeCartItem(dishId)
+  }
 
   return (
     <li className="cart-item-container">
-      <img className="cart-item-image" src={dishImage} alt="dishName" />
+      <img className="cart-item-image" src={dishImage} alt={dishName} />
       <div className="cart-item-details">
         <p className="cart-item-name mb-1">{dishName}</p>
         <p className="dish-currency-price mt-0 mb-2">
           {dishCurrency} {(quantity * dishPrice).toFixed(2)}
         </p>
         <div className="control-btn-group">
-          <button type="button" className="control-btn" onClick={onDecreaseQty}>
+          <button
+            type="button"
+            className="control-btn"
+            onClick={onDecreaseQty}
+            data-testid="cart"
+          >
             -
           </button>
           <p className="cart-item-quantity">{quantity}</p>
-          <button type="button" className="control-btn" onClick={onIncreaseQty}>
+          <button
+            type="button"
+            className="control-btn"
+            onClick={onIncreaseQty}
+            data-testid="cart"
+          >
             +
           </button>
         </div>
@@ -43,4 +69,5 @@ const CartItem = ({cartItemDetails}) => {
     </li>
   )
 }
+
 export default CartItem

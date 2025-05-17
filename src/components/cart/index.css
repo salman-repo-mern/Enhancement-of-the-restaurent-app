@@ -1,9 +1,13 @@
 .cart-page-container {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-body-container {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .empty-view-image {
@@ -38,4 +42,20 @@
   background-color: transparent;
   border: none;
   outline: none;
+}
+.cart-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+.cart-items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

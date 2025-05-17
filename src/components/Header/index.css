@@ -51,8 +51,10 @@
   height: 25px;
   min-width: 25px;
   border-radius: 50%;
-  display: grid;
   place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cart-count {
@@ -62,4 +64,24 @@
   font-weight: 500;
   font-size: 12px;
   margin: 0;
+}
+
+.cart-icon-link {
+  position: relative;
+}
+
+.cart-count-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+}
+
+.cart-count {
+  line-height: 1;
 }
